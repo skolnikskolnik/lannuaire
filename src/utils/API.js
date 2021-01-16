@@ -1,7 +1,9 @@
+/* eslint-disable import/no-anonymous-default-export */
+//eslint-disable-next-line
 import axios from "axios";
 
 export default{
-    getEmployee: function(){
-        return axios.get("https://randomuser.me/api/");
+    getRandomList: function(){
+        return axios.get("https://randomuser.me/api/?results=20/?exc=login");
     }
 }
