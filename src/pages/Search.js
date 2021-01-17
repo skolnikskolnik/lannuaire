@@ -3,8 +3,11 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
+import Table from "../components/Table"
 import Alert from "../components/Alert";
 
+//I want the json object available as a prop
+let randList;
 class Search extends Component {
   state = {
     result: [],
@@ -15,8 +18,12 @@ class Search extends Component {
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
     API.getRandomList()
-        .then(res => console.log(res.data.results));
+        .then(res => {
+            randList = res.data.results;
+            this.setState({result: randList})
+        });
   }
+
 
   //Search by city
   searchByCity = (query) => {
@@ -57,6 +64,7 @@ class Search extends Component {
           />
           <SearchResults results={this.state.results} />
         </Container>
+        <Table randList={this.state.result}/>
       </div>
     );
   }
