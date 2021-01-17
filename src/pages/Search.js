@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Container from "../components/Container";
-import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Table from "../components/Table"
 import Alert from "../components/Alert";
+import Button from "../components/Button"
 
 //I want the json object available as a prop
 let randList;
@@ -25,43 +25,29 @@ class Search extends Component {
   }
 
 
-  //Search by city
+  //Search by state
   searchByCity = (query) => {
     API.getRandomNational(query)
         .then(res => this.setState({result: res}))
         .catch(err => console.log(err))
   }
 
-  handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      [name]: value
-    });
-  };
 
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchByCity(this.state.search);
-  };
-
+  //The user should be able to sort by last name and gender
   render() {
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
-          <h1 className="text-center">Search By Country!</h1>
+          <h1 className="text-center">Your employees:</h1>
+            <Button text={"Sort alphabetically"} name={"alphabet"}/>
+            <Button text={"Show only men"} name={"men"} />
+            <Button text={"Show only women"} name={"women"} />
           <Alert
             type="danger"
             style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
           >
             {this.state.error}
           </Alert>
-          <SearchForm
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}
-            countryCode={this.state.countryCode}
-          />
           <SearchResults results={this.state.results} />
         </Container>
         <Table randList={this.state.result}/>
