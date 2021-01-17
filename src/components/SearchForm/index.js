@@ -6,7 +6,7 @@ function SearchForm(props) {
   return (
     <form className="search">
       <div className="form-group">
-        <label htmlFor="cities">City:</label>
+        <label htmlFor="cities">Country:</label>
         <input
           value={props.search}
           onChange={props.handleInputChange}
@@ -14,7 +14,7 @@ function SearchForm(props) {
           list="cities"
           type="text"
           className="form-control"
-          placeholder="Type in a city to begin"
+          placeholder="Type in a country code to begin (Ex: Great Britain = gb)"
           id="city"
         />        <datalist id="citiess">
 

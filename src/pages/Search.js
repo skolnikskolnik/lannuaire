@@ -7,42 +7,43 @@ import Alert from "../components/Alert";
 
 class Search extends Component {
   state = {
+    result: [],
     search: "",
-    lastname: "",
-    city: "",
-    results: [],
-    error: ""
+    countryCode: ""
   };
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
     API.getRandomList()
-      .then(res => {
-        this.setState({ results: res })
-      })
-      .catch(err => console.log(err));
+        .then(res => console.log(res.data.results));
   }
 
-//   handleInputChange = event => {
-//     this.setState({ search: event.target.value });
-//   };
+  //Search by city
+  searchByCity = (query) => {
+    API.getRandomNational(query)
+        .then(res => this.setState({result: res}))
+        .catch(err => console.log(err))
+  }
 
-//   handleFormSubmit = event => {
-//     event.preventDefault();
-//     API.getDogsOfBreed(this.state.search)
-//       .then(res => {
-//         if (res.data.status === "error") {
-//           throw new Error(res.data.message);
-//         }
-//         this.setState({ results: res.data.message, error: "" });
-//       })
-//       .catch(err => this.setState({ error: err.message }));
-//   };
+  handleInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  };
+
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.searchByCity(this.state.search);
+  };
+
   render() {
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
-          <h1 className="text-center">Search By Breed!</h1>
+          <h1 className="text-center">Search By Country!</h1>
           <Alert
             type="danger"
             style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
@@ -52,7 +53,7 @@ class Search extends Component {
           <SearchForm
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
-            breeds={this.state.breeds}
+            countryCode={this.state.countryCode}
           />
           <SearchResults results={this.state.results} />
         </Container>
