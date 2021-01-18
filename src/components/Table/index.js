@@ -4,15 +4,8 @@ import React from "react";
 //Table should have a col for: last name, first name, location, and picture
 function Table(props) {
 
-  let visibleOrNot = "";
-  if (props.classToAdd === true){
-    visibleOrNot = "visible";
-  } else if (props.classToAdd=== false){
-    visibleOrNot = "invisible";
-  }
   return (
 
-    <div className={visibleOrNot}>
     <table className="table">
       <thead>
         <tr>
@@ -37,7 +30,6 @@ function Table(props) {
         ))}
       </tbody>
     </table>
-    </div>
   )
 }
 

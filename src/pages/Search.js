@@ -69,7 +69,6 @@ class Search extends Component {
                 </Container>
                 <Table
                     alphebetized={this.state.alphebetized}
-                    classToAdd={this.state.showOriginalTable}
                     sortAlphabet={this.sortAlphabet}
                     randList={this.state.result} />
             </div>
