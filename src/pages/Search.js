@@ -10,9 +10,7 @@ class Search extends Component {
     state = {
         search: "",
         result: [],
-        showOriginalTable: true,
-        alphebetized: false,
-        country: ""
+        alphebetized: false
     };
 
 
@@ -35,33 +33,30 @@ class Search extends Component {
     }
 
     //When only USA is clicked, a new API call should be run
-    onlyUsa = () => {
-        API.getRandomNational("us")
+    oneCountry = (nat) => {
+        API.getRandomNational(nat)
             .then(res => {
                 randList = res.data.results;
                 this.setState({ result: randList })
             })
+    }
+
+    onlyUsa = () => {
+        let natCode = "us";
+        this.oneCountry(natCode);
     }
 
     onlyGb = () => {
-        API.getRandomNational("gb")
-            .then(res => {
-                randList = res.data.results;
-                this.setState({ result: randList })
-            })
+        let natCode = "gb";
+        this.oneCountry(natCode);
     }
 
     onlyFr = () => {
-        API.getRandomNational("fr")
-            .then(res => {
-                randList = res.data.results;
-                this.setState({ result: randList })
-            })
+        let natCode = "fr";
+        this.oneCountry(natCode);
     }
 
 
-    //The user should be able to sort by last name and gender
-    //Maybe a new table for the sort by gender?
     render() {
         return (
             <div>
