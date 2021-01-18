@@ -3,7 +3,16 @@ import React from "react";
 
 //Table should have a col for: last name, first name, location, and picture
 function Table(props) {
+
+  let visibleOrNot = "";
+  if (props.classToAdd === true){
+    visibleOrNot = "visible";
+  } else if (props.classToAdd=== false){
+    visibleOrNot = "invisible";
+  }
   return (
+
+    <div className={visibleOrNot}>
     <table className="table">
       <thead>
         <tr>
@@ -18,7 +27,7 @@ function Table(props) {
       <tbody>
         {props.randList.map((item, index) => (
           <tr key={index}>
-            <th scope="row">{index}</th>
+            <th scope="row">{index + 1}</th>
             <td>{item.name.last}</td>
             <td>{item.name.first}</td>
             <td>{item.location.city}, {item.location.state}, {item.location.country}</td>
@@ -28,6 +37,7 @@ function Table(props) {
         ))}
       </tbody>
     </table>
+    </div>
   )
 }
 

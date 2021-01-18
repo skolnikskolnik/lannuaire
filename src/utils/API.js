@@ -4,10 +4,10 @@ import axios from "axios";
 
 export default{
     getRandomList: function(){
-        return axios.get("https://randomuser.me/api/?results=10&nat=us");
+        return axios.get("https://randomuser.me/api/?results=10&nat=us,gb,fr");
     },
 
     getRandomNational: function(nationCode){
-        return axios.get(`https://randomuser.me/api/?nat=${nationCode}/?results=20/?exc=login`);
+        return axios.get(`https://randomuser.me/api/?results=10&nat=${nationCode}`);
     }
 }
