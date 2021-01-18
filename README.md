@@ -22,7 +22,7 @@ The user is greeted with the following screen:
 
 The user can alphebatize and/or filter by country:
 The user is greeted with the following screen:
-![filter alpha](./pictures/usa_alpha.JPG)
+![filter alpha](./images/usa_alpha.JPG)
 
 ## Installation instructions: 
 Users should run npm install to install the dependencies before running locally.
