@@ -3,6 +3,7 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import Table from "../components/Table"
 import Button from "../components/Button"
+import SearchForm from "../components/SearchForm"
 
 //I want the json object available as a prop
 let randList;
@@ -10,7 +11,8 @@ class Search extends Component {
     state = {
         search: "",
         result: [],
-        alphebetized: false
+        alphebetized: false,
+        names: ""
     };
 
 
@@ -22,6 +24,8 @@ class Search extends Component {
                 this.setState({ result: randList })
             });
     }
+
+
 
     //Sorts alphabetically by last name
     sortAlphabet = () => {
@@ -56,10 +60,29 @@ class Search extends Component {
         this.oneCountry(natCode);
     }
 
+    //Sets what the user puts in as search 
+    handleInputChange = event => {
+        //Filter by what this.state.search
+        this.setState({ search: event.target.value });
+
+
+    };
+
+    // //Search for just the name of the person
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     //Filter just by that name  
+
+    // }
 
     render() {
         return (
             <div>
+                <SearchForm
+                    handleFormSubmit={this.handleFormSubmit}
+                    handleInputChange={this.handleInputChange}
+                    breeds={this.state.names}
+                />
                 <Container style={{ minHeight: "80%" }}>
                     <h1 className="text-center">Your employees:</h1>
                     <Button cb={this.sortAlphabet} text={"Sort alphabetically"} name={"alphabet"} />
@@ -70,7 +93,7 @@ class Search extends Component {
                 <Table
                     alphebetized={this.state.alphebetized}
                     sortAlphabet={this.sortAlphabet}
-                    randList={this.state.result} />
+                    randList={this.state.result.filter(user => user.name.first.toLowerCase().includes(this.state.search) || user.name.last.toLowerCase().includes(this.state.search))} />
             </div>
         );
     }

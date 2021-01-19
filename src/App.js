@@ -13,6 +13,7 @@ function App() {
         <Navbar />
         <Wrapper>
           <Route exact path="/" component={About} />
+          <Route exact path="/lannuaire" component={About} />
           <Route exact path="/search" component={Search} />
         </Wrapper>
         <Footer />
